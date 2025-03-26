@@ -13,6 +13,7 @@
     discord
     pavucontrol
     nerd-fonts.jetbrains-mono
+    bottles
   ];
 
   xresources.properties = {
