@@ -12,6 +12,14 @@
     ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+
+  nix.gc = { 
+    automatic = true; 
+    persistent = true; 
+    options = "--delete-older-than 7d"; 
+  };
+
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;

@@ -98,8 +98,8 @@
 				}
 				{ 
 					command = "polybar --reload example &";
-					always = false;
-					notification = false;
+					always = true;
+					notification = true;
 				}
 				{
 					command = "firefox";

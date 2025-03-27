@@ -13,7 +13,9 @@
     discord
     pavucontrol
     nerd-fonts.jetbrains-mono
+    nerd-fonts.bigblue-terminal
     bottles
+    btop
   ];
 
   xresources.properties = {
