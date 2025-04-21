@@ -28,8 +28,10 @@
 			menu = "rofi -show combi";
 			assigns = {
 				"1" = [
-					{ class = "^code$"; }
 					{ class = "^firefox$"; }
+				];
+				"2" = [
+					{ class = "^code$"; }
 				];
 				"10" = [
 					{ class = "^discord$";}
@@ -100,7 +102,7 @@
 					notification = false;
 				}
 				{ 
-					command = "polybar --reload example &";
+					command = "polybar --reload example";
 					always = true;
 					notification = true;
 				}
