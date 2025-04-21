@@ -31,7 +31,10 @@
 					{ class = "^code$"; }
 					{ class = "^firefox$"; }
 				];
-				"10" = [{ class = "^discord$";}];
+				"10" = [
+					{ class = "^discord$";}
+					{ class = "^vesktop$";}
+				];
 			};
 			floating = {
         criteria = [
