@@ -10,7 +10,7 @@
   ];
   
   home.packages = with pkgs; [
-    discord
+    vesktop
     pavucontrol
     nerd-fonts.jetbrains-mono
     nerd-fonts.bigblue-terminal
@@ -22,7 +22,7 @@
     "Xcursor.size" = 120;
   };
   # Allows downloading non-open-source software
-  nixpkgs.config.allowUnfree = true;
+  # nixpkgs.config.allowUnfree = true;
   
   # This tells Home Manager to manage XDG user directories and symlink .desktop files from your packages into ~/.local/share/applications, where GNOME expects them.
   xdg.enable = true;
