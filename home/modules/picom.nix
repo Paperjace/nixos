@@ -18,8 +18,8 @@
 			};
 		};
 		opacityRules = [
-			"80:class_g = 'ghostty' && focused"
-      "60:class_g = 'ghostty' && !focused"
+			"80:class_g = 'com.mitchellh.ghostty' && focused"
+      "60:class_g = 'com.mitchellh.ghostty' && !focused"
 			"100:class_g = 'Code' && focused"
       "60:class_g = 'Code' && !focused"
 			"100:class_g = 'firefox' && focused"
