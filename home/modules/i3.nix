@@ -31,7 +31,7 @@
 					{ class = "^firefox$"; }
 				];
 				"2" = [
-					{ class = "^code$"; }
+					{ class = "^Code$"; }
 				];
 				"10" = [
 					{ class = "^discord$";}
