@@ -123,7 +123,9 @@
      vim
      wget
      kitty
-     git     
+     git
+     wine64
+     winetricks
      #gnome specific
      gnome-tweaks
      
