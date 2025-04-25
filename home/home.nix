@@ -16,6 +16,7 @@
     nerd-fonts.bigblue-terminal
     bottles
     btop
+    qpwgraph
   ];
 
   xresources.properties = {
