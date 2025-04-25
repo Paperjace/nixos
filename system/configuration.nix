@@ -13,7 +13,6 @@
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-
   nix.gc = { 
     automatic = true; 
     persistent = true; 
@@ -125,6 +124,7 @@
      vim
      wget
      kitty
+     ghostty
      git
      wine64
      winetricks
@@ -143,7 +143,7 @@
   # Disable mouse acceleration.
   services.libinput.mouse = {
     accelProfile = "flat";
-    accelSpeed = "-0.5";
+    accelSpeed = "-0.7";
   };
 
   # Some programs need SUID wrappers, can be configured further or are
