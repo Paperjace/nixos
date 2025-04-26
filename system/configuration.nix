@@ -16,7 +16,7 @@
   nix.gc = { 
     automatic = true; 
     persistent = true; 
-    options = "--delete-older-than 7d"; 
+    options = "--delete-older-than +10"; 
   };
 
   # Bootloader.
@@ -61,6 +61,13 @@
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
   services.xserver.windowManager.i3.enable = true;
+  # Enable Hyprland
+  programs.hyprland = {
+    # Install the packages from nixpkgs
+    enable = true;
+    # Whether to enable XWayland
+    xwayland.enable = true;
+  };
   
   # Enable polkit and other GNOME services that help with GUI permissions
   security.polkit.enable = true;
@@ -100,7 +107,7 @@
   users.users.jason = {
     isNormalUser = true;
     description = "jason";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "input" ];
     shell = pkgs.zsh; 
  };
 
@@ -128,16 +135,33 @@
      git
      wine64
      winetricks
+     libnotify
+     dunst
+     spotify
+     playerctl
+     networkmanagerapplet
+     lxappearance
+
      #gnome specific
      gnome-tweaks
      
      #i3 specific
      i3status
      rofi
-     dunst
      feh
-     networkmanagerapplet
-     lxappearance
+
+     #hypland specific
+     wofi
+     waybar
+     hyprpaper
+     hypridle
+     hyprlock
+     hyprcursor
+     hyprpolkitagent
+     xdg-desktop-portal-hyprland
+
+     
+     
   ];
 
   # Disable mouse acceleration.
