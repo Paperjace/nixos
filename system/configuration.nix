@@ -16,7 +16,7 @@
   nix.gc = { 
     automatic = true; 
     persistent = true; 
-    options = "--delete-older-than +10"; 
+    options = "--delete-older-than 7d"; 
   };
 
   # Bootloader.
@@ -120,7 +120,7 @@
   systemd.services."autovt@tty1".enable = false;
 
   # Install firefox.
-  programs.firefox.enable = true;
+  programs.firefox.enable = true; 
   programs.zsh.enable = true;
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -133,6 +133,7 @@
      kitty
      ghostty
      git
+     librewolf
      wine64
      winetricks
      libnotify
@@ -141,6 +142,7 @@
      playerctl
      networkmanagerapplet
      lxappearance
+     fastfetch
 
      #gnome specific
      gnome-tweaks
@@ -159,10 +161,25 @@
      hyprcursor
      hyprpolkitagent
      xdg-desktop-portal-hyprland
-
-     
-     
+     grim
+     wl-clipboard
+     slurp
+     pywal16
+     imagemagick #pywal16 dep
+     pywalfox-native
+     hyprprop
   ];
+
+ environment.systemPackages = [ pkgs.cifs-utils ];
+  fileSystems."/mnt/share" = {
+    device = "//192.168.0.164/nasferatu";
+    fsType = "cifs";
+    options = let
+      # this line prevents hanging on network split
+      automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
+
+    in ["${automount_opts},credentials=~/.config/nixos/system/credentials/smb-secrets"];
+  };
 
   # Disable mouse acceleration.
   services.libinput.mouse = {

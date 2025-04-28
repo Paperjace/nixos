@@ -5,10 +5,9 @@
 		enable = true;
 		settings = {
 			theme = "tokyonight";
-			font-size = 16;
+			font-size = 12;
 			window-decoration = "false";
 			window-padding-x = 20;
-			window-padding-y = 20;
 		};
 	};
 }
