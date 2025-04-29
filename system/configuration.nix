@@ -107,7 +107,7 @@
   users.users.jason = {
     isNormalUser = true;
     description = "jason";
-    extraGroups = [ "networkmanager" "wheel" "input" ];
+    extraGroups = [ "networkmanager" "wheel" "input" "libvirtd" ];
     shell = pkgs.zsh; 
  };
 
@@ -122,8 +122,15 @@
   # Install firefox.
   programs.firefox.enable = true; 
   programs.zsh.enable = true;
+  programs.neovim.enable = true;
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
+
+  # Taken from https://nixos.wiki/wiki/Virt-manager
+  programs.virt-manager.enable = true;
+  users.groups.libvirtd.members = ["jason"];
+  virtualisation.libvirtd.enable = true;
+  virtualisation.spiceUSBRedirection.enable = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -143,7 +150,7 @@
      networkmanagerapplet
      lxappearance
      fastfetch
-
+     cifs-utils
      #gnome specific
      gnome-tweaks
      
@@ -152,7 +159,7 @@
      rofi
      feh
 
-     #hypland specific
+     #hyprland specific
      wofi
      waybar
      hyprpaper
@@ -168,9 +175,14 @@
      imagemagick #pywal16 dep
      pywalfox-native
      hyprprop
+     kdePackages.qtsvg
+     kdePackages.dolphin
+     kdePackages.qt6ct
+     libsForQt5.dolphin
+     nwg-look
+     whitesur-gtk-theme
   ];
 
- environment.systemPackages = [ pkgs.cifs-utils ];
   fileSystems."/mnt/share" = {
     device = "//192.168.0.164/nasferatu";
     fsType = "cifs";
@@ -178,7 +190,7 @@
       # this line prevents hanging on network split
       automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
 
-    in ["${automount_opts},credentials=~/.config/nixos/system/credentials/smb-secrets"];
+    in ["${automount_opts},credentials=/home/jason/.config/nixos/system/credentials/smb-secrets,uid=1000,gid=100"];
   };
 
   # Disable mouse acceleration.
