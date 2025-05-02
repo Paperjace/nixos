@@ -68,11 +68,11 @@
     # Whether to enable XWayland
     xwayland.enable = true;
   };
-  
+
   # Enable polkit and other GNOME services that help with GUI permissions
   security.polkit.enable = true;
   services.dbus.enable = true;
-  
+
   services.flatpak.enable = true;
 
   # Configure keymap in X11
@@ -83,7 +83,6 @@
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
-
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
@@ -109,7 +108,7 @@
     description = "jason";
     extraGroups = [ "networkmanager" "wheel" "input" "libvirtd" ];
     shell = pkgs.zsh; 
- };
+  };
 
   # Enable automatic login for the user.
   # services.xserver.displayManager.autoLogin.enable = true;
@@ -126,62 +125,83 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  # Taken from https://nixos.wiki/wiki/Virt-manager
+  # # Taken from https://nixos.wiki/wiki/Virt-manager
   programs.virt-manager.enable = true;
   users.groups.libvirtd.members = ["jason"];
-  virtualisation.libvirtd.enable = true;
-  virtualisation.spiceUSBRedirection.enable = true;
+
+  virtualisation = {
+      spiceUSBRedirection.enable = true;
+      libvirtd = {
+        enable = true;
+        qemu.swtpm.enable = true;
+        qemu.ovmf.enable = true;
+        qemu.ovmf.packages =[pkgs.OVMFFull.fd];
+      };
+    };
+
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-     vim
-     wget
-     kitty
-     ghostty
-     git
-     librewolf
-     wine64
-     winetricks
-     libnotify
-     dunst
-     spotify
-     playerctl
-     networkmanagerapplet
-     lxappearance
-     fastfetch
-     cifs-utils
-     #gnome specific
-     gnome-tweaks
-     
-     #i3 specific
-     i3status
-     rofi
-     feh
+    vim
+    wget
+    kitty
+    ghostty
+    git
+    librewolf
+    bottles
+    winetricks
+    libnotify
+    dunst
+    spotify
+    playerctl
+    networkmanagerapplet
+    lxappearance
+    fastfetch
+    cifs-utils
+    quickemu
+    spice-gtk
+  #  swtpm
+    vlc
+    #gnome specific
+    gnome-tweaks
+    numlockx
+    
+    #i3 specific
+    i3status
+    rofi
+    feh
 
-     #hyprland specific
-     wofi
-     waybar
-     hyprpaper
-     hypridle
-     hyprlock
-     hyprcursor
-     hyprpolkitagent
-     xdg-desktop-portal-hyprland
-     grim
-     wl-clipboard
-     slurp
-     pywal16
-     imagemagick #pywal16 dep
-     pywalfox-native
-     hyprprop
-     kdePackages.qtsvg
-     kdePackages.dolphin
-     kdePackages.qt6ct
-     libsForQt5.dolphin
-     nwg-look
-     whitesur-gtk-theme
+    #hyprland specific
+    wofi
+    waybar
+    hyprpaper
+    hypridle
+    hyprlock
+    hyprcursor
+    hyprpolkitagent
+    xdg-desktop-portal-hyprland
+    grim
+    wl-clipboard
+    slurp
+    pywal16
+    imagemagick #pywal16 dep
+    pywalfox-native
+    hyprprop
+    kdePackages.qtsvg
+    kdePackages.dolphin
+    kdePackages.qt6ct
+    libsForQt5.dolphin
+    nwg-look
+    whitesur-gtk-theme
   ];
+
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+    # dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+    localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
+  };
 
   fileSystems."/mnt/share" = {
     device = "//192.168.0.164/nasferatu";

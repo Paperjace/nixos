@@ -7,7 +7,7 @@
 			theme = "tokyonight";
 			font-size = 12;
 			window-decoration = "false";
-			window-padding-x = 20;
+			# window-padding-x = 20;
 		};
 	};
 }
