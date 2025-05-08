@@ -72,7 +72,22 @@
   # Enable polkit and other GNOME services that help with GUI permissions
   security.polkit.enable = true;
   services.dbus.enable = true;
-
+  # systemd = {
+  #   user.services.polkit-gnome-authentication-agent-1 = {
+  #     description = "polkit-gnome-authentication-agent-1";
+  #     wantedBy = [ "graphical-session.target" ];
+  #     wants = [ "graphical-session.target" ];
+  #     after = [ "graphical-session.target" ];
+  #     serviceConfig = {
+  #         Type = "simple";
+  #         ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+  #         Restart = "on-failure";
+  #         RestartSec = 1;
+  #         TimeoutStopSec = 10;
+  #       };
+  #   };
+  # };
+  
   services.flatpak.enable = true;
 
   # Configure keymap in X11
@@ -139,7 +154,7 @@
       };
     };
 
-
+  
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -161,6 +176,7 @@
     cifs-utils
     quickemu
     spice-gtk
+    lxqt.lxqt-policykit
   #  swtpm
     vlc
     #gnome specific
