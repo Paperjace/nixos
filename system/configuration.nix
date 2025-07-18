@@ -124,6 +124,7 @@
     extraGroups = [ "networkmanager" "wheel" "input" "libvirtd" ];
     shell = pkgs.zsh; 
   };
+  programs.zsh.promptInit = "source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
 
   # Enable automatic login for the user.
   # services.xserver.displayManager.autoLogin.enable = true;
@@ -182,6 +183,7 @@
     #gnome specific
     gnome-tweaks
     numlockx
+    gnome-extension-manager
     
     #i3 specific
     i3status
@@ -210,6 +212,7 @@
     libsForQt5.dolphin
     nwg-look
     whitesur-gtk-theme
+    zsh-powerlevel10k
   ];
 
   programs.steam = {
