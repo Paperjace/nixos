@@ -171,7 +171,7 @@
     dunst
     spotify
     playerctl
-    networkmanagerapplet
+    # networkmanagerapplet
     lxappearance
     fastfetch
     cifs-utils
